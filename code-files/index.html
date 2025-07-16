@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Finder</title>
+    <link rel="stylesheet" href="style.css">      <!--CSS stylesheet-->
+    <link rel="icon" type="image/jpg" href="">    <!--Icon-->
+
+  </head>
+
+  <body>
+
+    <header>
+      <h1 style="text-align: center;">Movie Finder</h1>
+      <p>Type a movie title and click Search to find movies.</p>
+    </header>
+
+    <!-- This section has the search form -->
+    <section id="search-section">
+      <form id="search-form" action="{{ url_for('search') }}" method="get">
+        <!-- Label for the input box -->
+        <label for="query">Search for a movie:</label>
+        <!-- Input box where the user types -->
+        <input
+          type="text"
+          id="query"
+          name="query"
+          placeholder="Enter movie title..."
+          required
+        >
+        <!-- The button that sends the form data to the Flask app -->
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <!-- This is where the results will be shown -->
+    <main id="results">
+      <h2>Search Results</h2>
+      <div class="movie-grid">
+        <!-- If movies are found, loop through them and show each one -->
+        {% if movies %}
+          {% for movie in movies %}
+            <div class="movie-card">
+              <!-- Movie poster -->
+              <img src="{{ movie.Poster or url_for('static', filename='no-poster.png') }}" alt="Poster of {{ movie.Title }}">
+              <!-- Movie info -->
+              <div class="movie-info">
+                <h3>{{ movie.Title }}</h3>
+                <p>Year: {{ movie.Year }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- If no movies are found -->
+          <p>No movies found. Try a different search.</p>
+        {% endif %}
+      </div>
+    </main>
+
+    <!-- This links your JavaScript if you have any -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
