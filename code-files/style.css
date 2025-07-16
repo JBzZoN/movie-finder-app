@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Michroma;
+    src: url(../fonts/Michroma-Regular.ttf);
+}
+
+header {
+    height: 15vh;
+    font-family: Michroma;
+}
+
+header #navbar{
+    height:7vh;
+    min-height: 40px;
+    background-color: hsl(0, 3%, 13%);
+
+    /* flex box */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+header #navbar a{
+    height: 100%;
+    width: 30%;
+    text-align: center;
+    align-content: center;
+}
+
+header #navbar a:hover{
+    background-color: rgba(128, 128, 128, 0.884);
+}
+
+header #navbar a{
+    text-decoration: none;
+    color: white;
+}
+
+body {
+    margin: 0;
+    background-image: url(../images/background.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    margin: 20px;
+}
+
+main #search-section{
+    height: 50vh;
+    min-height: 300px;
+    text-align: center;
+    align-content: center;
+}
+
+main #search-section input{
+    width: 75%;
+    height: 40px;
+    font-size: 16px;
+    border:none;
+}
+
+#aboutus, #contactus{
+    height: 50vh;
+    min-height: 300px;
+    text-align: center;
+    align-content: center;
+    font-family: Michroma;
+    font-size: 50px;
+    color: black;
+    text-shadow: 3px 3px cyan;
+}
