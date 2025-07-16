@@ -30,7 +30,7 @@ header #navbar a{
 }
 
 header #navbar a:hover{
-    background-color: rgba(128, 128, 128, 0.884);
+    background-color: rgba(52, 51, 51, 0.884);
 }
 
 header #navbar a{
@@ -63,6 +63,7 @@ main #search-section input{
     height: 40px;
     font-size: 16px;
     border:none;
+    font-family: Michroma;
 }
 
 #aboutus, #contactus{
