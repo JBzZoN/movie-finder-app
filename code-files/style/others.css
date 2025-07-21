@@ -1,0 +1,43 @@
+#search-section form{
+    height: 500px;
+
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+main #search-section input{
+    width: 75%;
+    height: 50px;
+
+    border-radius: 25px;
+    box-shadow: 1px 1px 10px rgba(5, 5, 5, 0.1);
+    border: none;   
+
+    font-size: 16px;
+    font-weight: 100;
+
+    padding-left: 30px;
+
+    transition: box-shadow 0.2s;
+}
+
+#search-section input:hover{
+    box-shadow: 1px 1px 10px rgba(5, 5, 5, 0.2);
+    border: none;
+}
+
+#search-section input:focus{
+    border: none;
+    outline: none;
+    box-shadow: 1px 1px 10px rgba(5, 5, 5, 0.2);
+}
+
+#contactus-text-demo{
+    height: 300px;
+    text-align: center;
+    align-content: center;
+    color: black;
+}
