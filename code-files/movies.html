@@ -1,80 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <head>
+  <title>Movie Finder</title>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Movie Finder</title>
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style/header-and-footer.css" />
+  <link rel="stylesheet" href="style/general.css" />
+  <link rel="stylesheet" href="style/others.css" />
+  <link rel="stylesheet" href="style/movie.css" />
 
-    <!--CSS stylesheets-->
-    <link rel="stylesheet" href="style/header-and-footer.css">
-    <link rel="stylesheet" href="style/general.css">  
-    <link rel="stylesheet" href="style/others.css">   
-    <link rel="stylesheet" href="style/movie.css">                 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/window_icon.png" />
 
-    <!--Icon-->
-    <link rel="icon" type="image/png" href="../images/window_icon.png">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
 
-    <!--Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <header>
+    <h1 style="text-align: center;">Movie Finder</h1>
 
-  </head>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+      <a href="index.html"><div>Home</div></a>
+      <a href="movies.html"><div>Movies</div></a>
+      <a href="#aboutus-footer"><div>About us</div></a>
+    </nav>
+  </header>
 
-  <body>
+  <main>
+    <section id="movie-display" aria-label="Available Movies">
+      <!-- Movie boxes will be inserted here by JavaScript -->
+    </section>
+  </main>
 
-    <header>
-      <h1 style="text-align: center;">Movie Finder</h1>
+  <hr style="color: grey;" />
 
-      <!--Navigation Bar-->
-      <nav id="navbar">
-          <a href="index.html"><div>Home</div></a>
-          <a href="movies.html"><div>Movies</div></a>
-          <a href="#aboutus-footer"><div>About us</div></a>
-      </nav>
+  <footer id="aboutus-footer">
+    <p><strong>About Us</strong></p>
+    <p>This Movie Finder website is a personal project built by <strong>Josh Biju</strong> and <strong>Vishnumukund</strong>.</p>
+    <p>We created this site to help users easily find movies and know where to watch them — filtered by language and OTT platforms.</p>
+    <p>Built with &#10084; using Python Flask and simple HTML & CSS.</p>
+  </footer>
 
-    </header>
-
-    <main>
-
-      <section id="movie-display">
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-        <div class="movie-box"></div>
-      </section>
-
-    </main>
-    <hr style="color: grey;">
-    <footer id="aboutus-footer">
-      <p><strong>About Us</strong></p>
-      <p>This Movie Finder website is a personal project built by <strong>Josh Biju</strong> and <strong>Vishnumukund</strong>.</p>
-      <p>We created this site to help users easily find movies and know where to watch them — filtered by language and OTT platforms.</p>
-      <p>Built with &#10084; using Python Flask and simple HTML & CSS.</p>
-    </footer>
-  </body>
+  <!-- JS File -->
+  <script src="js/moviebox.js"></script>
+</body>
 </html>
