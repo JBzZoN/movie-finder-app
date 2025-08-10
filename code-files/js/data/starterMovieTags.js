@@ -1,3 +1,5 @@
+// each tag has approx 10 movies
+// below contains 75 tags (750 movies) which are verified
 export let starterMovies = [
   'batman', 'spider', 'men in', 'rush', 'harry',
   'jurassic', 'iron', 'pirates', 'world', 'rider',

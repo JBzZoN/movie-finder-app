@@ -19,7 +19,7 @@ while(starterMovies.length != 5) {
 const apikey = `b7df9d12`;
 let result = [];
 
-const intervalValue = setInterval(loadingScreen, 300);
+const intervalValue = setInterval(()=>{loadingScreen(loadingText);}, 300);
 
 
 async function getMovies() {
@@ -70,19 +70,16 @@ getMovies().then(() => {
   movieBox.innerHTML = postHtml;
 });
 
-function loadingScreen() {
+const loadingText = document.querySelector('.text-loader');
 
-  const loadingText = document.querySelector('.text-loader');
-  if(loadingText) {
-    loadingText.innerHTML += '.';
+function loadingScreen(textObj) {
 
-    if(loadingText.innerHTML == 'Loading....') {
-      loadingText.innerHTML = 'Loading';
+  if(textObj) {
+    textObj.innerHTML += '.';
+
+    if(textObj.innerHTML == 'Loading....') {
+      textObj.innerHTML = 'Loading';
     }
   }
   
-}
-
-function afterLoading() {
-
 }
