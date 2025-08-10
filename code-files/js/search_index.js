@@ -3,6 +3,16 @@ const apikey = `b7df9d12`;
 const searchButtonArea = document.querySelector('#search-section');
 const searchPageResults = document.querySelector('.extra-on-enter');
 const horizontalRule = document.querySelector('.horizontal-rule');
+const closeButton = document.querySelector('.close-button');
+const noResult = document.querySelector('.no-results');
+
+closeButton.addEventListener('click', () => {
+    searchButton.value = '';
+    searchButtonArea.style.height = `500px`;
+    searchPageResults.innerHTML = ``;
+    horizontalRule.innerHTML = ``;
+});
+
 
 let results = [];
 let results_html = '';
@@ -46,6 +56,12 @@ searchButton.addEventListener('keydown', (event) => {
                 ${results_html}
                 `;
             }else {
+
+                noResult.style.opacity = '1';
+                setTimeout(() => {
+                    noResult.style.opacity = '0';
+                }, 1000); // stays visible for 1 seconds
+
                 searchButtonArea.style.height = `500px`;
                 searchPageResults.innerHTML = ``;
                 horizontalRule.innerHTML = ``;

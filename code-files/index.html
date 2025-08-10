@@ -41,9 +41,21 @@
       <main>
         
         <section id="search-section">
-            
-          <input type="text" placeholder="Enter the movie title..." required class="search-bar"> <!-- Input box where the user types -->
-        
+          <div class="search-box-relative">
+
+            <div class="no-results">
+              no results
+            </div>
+
+            <div class="search-box">
+              <input type="text" placeholder="Enter the movie title..." class="search-bar" spellcheck="false"> <!-- Input box where the user types -->
+
+              <div class="close-button">
+                <img src="../images/close-button.png" alt="">
+              </div>
+            </div>
+
+          </div>        
         </section>
 
         <section id="search-results">
