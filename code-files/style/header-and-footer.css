@@ -3,7 +3,7 @@ header h1{
     font-weight: 300;
 }
 
-header #navbar{
+header .navbar{
     height:60px;
     background-color: white;
     box-shadow: inset 2px 2px 10px rgba(105, 102, 102, 0.2);
@@ -13,7 +13,7 @@ header #navbar{
     display: flex;
 }
 
-header #navbar a{
+header .navbar a{
     border-right: 1px solid grey;
     text-align: center;
     align-content: center;
@@ -23,7 +23,7 @@ header #navbar a{
     flex:1;               /* for each to occupy same space */
 }
 
-header #navbar a:hover{
+header .navbar a:hover{
     background-color: rgba(230, 226, 226, 0.884);
 }
 

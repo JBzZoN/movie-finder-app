@@ -12,7 +12,7 @@
     <!--CSS stylesheets-->
     <link rel="stylesheet" href="style/header-and-footer.css">
     <link rel="stylesheet" href="style/general.css">  
-    <link rel="stylesheet" href="style/others.css">   
+    <link rel="stylesheet" href="style/index.css">   
     <link rel="stylesheet" href="style/movie.css">                 
 
     <!--Icon-->
@@ -31,7 +31,7 @@
         <h1>Movie Finder</h1>
 
         <!--Navigation Bar-->
-        <nav id="navbar">
+        <nav class="navbar">
             <a href="index.html"><div>Home</div></a>
             <a href="movies.html"><div>Movies</div></a>
             <a href="#aboutus-footer"><div>About us</div></a>
@@ -41,12 +41,9 @@
       <main>
         
         <section id="search-section">
-
-          <form id="search-form" action="something associated with the backend" method="backend related">
             
-            <input type="text" placeholder="Enter the movie title..." required> <!-- Input box where the user types -->
-          
-          </form>
+          <input type="text" placeholder="Enter the movie title..." required class="search-bar"> <!-- Input box where the user types -->
+        
         </section>
 
         <section id="reccomendations">
@@ -63,6 +60,8 @@
       <p>We created this site to help users easily find movies and know where to watch them — filtered by language and OTT platforms.</p>
       <p>Built with &#10084; using Python Flask and simple HTML & CSS.</p>
     </footer>
+
+    <script src="./js/search_index.js"></script>
 
   </body>
 </html>
