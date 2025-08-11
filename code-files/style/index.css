@@ -58,6 +58,8 @@ main #search-section input {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: background-color 1s, transform 1s;
 }
 
 .close-button:hover {

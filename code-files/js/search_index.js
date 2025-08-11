@@ -6,6 +6,10 @@ const horizontalRule = document.querySelector('.horizontal-rule');
 const closeButton = document.querySelector('.close-button');
 const noResult = document.querySelector('.no-results');
 
+let animationOn = false;
+let animationKey;
+let animationColor = `rgba(217, 94, 94, 1)`;
+
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
     searchButtonArea.style.height = `500px`;
@@ -13,6 +17,32 @@ closeButton.addEventListener('click', () => {
     horizontalRule.innerHTML = ``;
 });
 
+function animation() {
+    if(animationOn === false){
+        closeButton.style.backgroundColor = `${animationColor}`;
+        closeButton.style.transform = `rotate(180deg)`;
+        animationOn = true;
+    }
+    else{
+        closeButton.style.backgroundColor = 'white';
+        closeButton.style.transform = `rotate(0deg)`;
+        animationOn = false;
+    }
+    animationKey = setInterval(()=> {
+
+        if(animationOn === false){
+            closeButton.style.backgroundColor = `${animationColor}`;
+            closeButton.style.transform = `rotate(180deg)`;
+            animationOn = true;
+        }
+        else{
+            closeButton.style.backgroundColor = 'white';
+            closeButton.style.transform = `rotate(0deg)`;
+            animationOn = false;
+        }
+        
+    }, 1000);
+}
 
 let results = [];
 let results_html = '';
@@ -20,9 +50,12 @@ let results_html = '';
 searchButton.addEventListener('keydown', (event) => {
     if(event.key == 'Enter') {
         let url = `http://www.omdbapi.com/?apikey=${apikey}&s=${searchButton.value}`;
+
+        animation();
         
         fetch(url).then((response) => response.json()
         ).then((data) => {
+
             if(data.Response == 'True') {
                 results = [];
                 data.Search.forEach((movObj) => {
@@ -56,7 +89,12 @@ searchButton.addEventListener('keydown', (event) => {
                     <!--content-->
                     ${results_html}
                     `;
-                })
+
+                    clearInterval(animationKey);
+                    closeButton.style.backgroundColor = 'white';
+                    closeButton.style.transform = `rotate(0deg)`;
+                    animationOn = false;
+                });
 
             }else {
 
@@ -68,6 +106,11 @@ searchButton.addEventListener('keydown', (event) => {
                 searchButtonArea.style.height = `500px`;
                 searchPageResults.innerHTML = ``;
                 horizontalRule.innerHTML = ``;
+
+                clearInterval(animationKey);
+                closeButton.style.backgroundColor = 'white';
+                closeButton.style.transform = `rotate(0deg)`;
+                animationOn = false;
             }
         });
     }
