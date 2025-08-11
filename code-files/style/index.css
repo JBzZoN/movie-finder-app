@@ -6,6 +6,7 @@
 
     align-items: center;
     justify-content: center;
+    transition: height 1s;
 }
 
 main #search-section input {
