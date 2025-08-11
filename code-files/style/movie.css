@@ -74,3 +74,30 @@
   margin: 0;
   font-size: 0.8em;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination div {
+  width: 35px;
+  height: 40px;
+
+  border: 2px solid grey;
+  background-color: rgb(218, 204, 204);
+
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pagination div:hover {
+  background-color: grey;
+  border: 2px solid rgb(218, 204, 204);
+  color: rgb(218, 204, 204);
+}

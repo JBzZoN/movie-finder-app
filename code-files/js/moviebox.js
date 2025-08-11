@@ -1,5 +1,12 @@
 import { starterMovies as tags } from "./data/starterMovieTags.js";
 
+
+// Pagination
+const paginationDiv = document.querySelector('.pagination');
+const loadingText = document.querySelector('.text-loader');
+let pageNumber = 1;
+
+
 const starterMovies = [];
 const randomNumbers = [];
 // with 5 movie tags upto 50 movies
@@ -69,20 +76,62 @@ getMovies().then(() => {
     }
     createMovieBox();
     movieBox.innerHTML = postHtml;
+    paginationDiv.innerHTML = `
+    <div class="left-page"><<</div>
+    <div>${pageNumber}</div>
+    <div>${pageNumber + 1}</div>
+    <div>${pageNumber + 2}</div>
+    <div class="right-page">>></div>
+    `;
+
+    document.querySelector('.left-page').addEventListener('click', () => {
+      pageNumber -= 1;
+      if(pageNumber < 1) {
+        pageNumber = 1;
+      }
+      loadPagination();
+    });
+
+    document.querySelector('.right-page').addEventListener('click', () => {
+      pageNumber += 1;
+      loadPagination();
+    });
     
   });
   
   
 });
 
-const loadingText = document.querySelector('.text-loader');
+
+// Pagination
+function loadPagination() {
+  paginationDiv.innerHTML = `
+  <div class="left-page"><<</div>
+  <div>${pageNumber}</div>
+  <div>${pageNumber + 1}</div>
+  <div>${pageNumber + 2}</div>
+  <div class="right-page">>></div>
+  `;
+  document.querySelector('.left-page').addEventListener('click', () => {
+    pageNumber -= 1;
+    if(pageNumber < 1) {
+      pageNumber = 1;
+    }
+    loadPagination();
+  });
+
+  document.querySelector('.right-page').addEventListener('click', () => {
+    pageNumber += 1;
+    loadPagination();
+  });
+}
 
 function loadingScreen(textObj) {
 
   if(textObj) {
     textObj.innerHTML += '.';
 
-    if(textObj.innerHTML == 'Loading....') {
+    if(textObj.innerHTML === 'Loading....') {
       textObj.innerHTML = 'Loading';
     }
   }
