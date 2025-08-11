@@ -1,5 +1,12 @@
 import { starterMovies as tags } from "./data/starterMovieTags.js";
+import { listOfIMDB } from "./data/movieImdbList.js";
+import { movieObjects } from "./data/movieObjects.js";
+import { movieToImdb } from "./data/movieNameToImdb.js";
 
+
+console.log(listOfIMDB.length);
+console.log(movieObjects.length);
+console.log(movieToImdb.length);
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
@@ -25,6 +32,7 @@ while(starterMovies.length != 5) {
 // OMDB API initialisation. 1000 req per day
 // Another one - `b7df9d12` Over for 12-08-2025
 // Another one - `d4d6bd1b`
+// Another one - `acd519e3`
 const apikey = `cd72faf7`;
 let result = [];
 
