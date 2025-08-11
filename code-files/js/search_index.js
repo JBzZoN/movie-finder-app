@@ -20,14 +20,10 @@ let results_html = '';
 searchButton.addEventListener('keydown', (event) => {
     if(event.key == 'Enter') {
         let url = `http://www.omdbapi.com/?apikey=${apikey}&s=${searchButton.value}`;
-        console.log();
+        
         fetch(url).then((response) => response.json()
         ).then((data) => {
             if(data.Response == 'True') {
-
-                horizontalRule.innerHTML = `
-                <hr style="color: grey;">
-                `;
                 results = [];
                 data.Search.forEach((movObj) => {
                     results.push({
@@ -38,6 +34,11 @@ searchButton.addEventListener('keydown', (event) => {
                 });
 
                 checkIfItHasAnImage().then(() => {
+
+                    horizontalRule.innerHTML = `
+                    <hr style="color: grey;">
+                    `;
+
                     results_html = ``;
                     results.forEach((movie) => {
                     results_html += `
@@ -50,7 +51,6 @@ searchButton.addEventListener('keydown', (event) => {
                     </div>`;
                     });
 
-                    console.log(results);
                     searchButtonArea.style.height = `200px`;
                     searchPageResults.innerHTML = `
                     <!--content-->
