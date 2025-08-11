@@ -40,8 +40,6 @@ const movieBox = document.querySelector('#movie-display');
 // after loading the api request, execute the function inside then
 getMovies().then(() => {
 
-  // Stop loading screen
-  clearInterval(intervalValue);
   movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
   movieBox.style.marginTop = `50px`;
   
@@ -52,22 +50,29 @@ getMovies().then(() => {
       poster_url: movObj.Poster
     });
   });
+
+  checkIfItHasAnImage().then(() => {
+    let postHtml = '';
+    // Stop loading screen
+    clearInterval(intervalValue);
+    function createMovieBox() {
+      movies.forEach((movie) => {
+        postHtml += `
+        <div class="movie-box">
+          <img src="${movie.poster_url}" alt="${movie.title} Poster">
+          <div class="movie-info">
+            <h3>${movie.title}</h3>
+            <p>${movie.description}</p>
+          </div>
+        </div>`;
+      });
+    }
+    createMovieBox();
+    movieBox.innerHTML = postHtml;
+    
+  });
   
-  let postHtml = '';
-  function createMovieBox() {
-    movies.forEach((movie) => {
-      postHtml += `
-      <div class="movie-box">
-        <img src="${movie.poster_url}" alt="${movie.title} Poster">
-        <div class="movie-info">
-          <h3>${movie.title}</h3>
-          <p>${movie.description}</p>
-        </div>
-      </div>`;
-    });
-  }
-  createMovieBox();
-  movieBox.innerHTML = postHtml;
+  
 });
 
 const loadingText = document.querySelector('.text-loader');
@@ -82,4 +87,19 @@ function loadingScreen(textObj) {
     }
   }
   
+}
+
+// movies is a list of objects
+async function checkIfItHasAnImage() {
+    for(let i = 0; i < movies.length; i++) {
+        
+        await fetch(movies[i].poster_url).then((response) => {
+            if(response.ok === false) {
+                movies[i].poster_url = `../images/empty.png`;
+            }
+        }).catch((error) => {
+            movies[i].poster_url = `../images/empty.png`;
+        })
+            
+    }
 }
