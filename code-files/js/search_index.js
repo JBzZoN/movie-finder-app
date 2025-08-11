@@ -37,24 +37,27 @@ searchButton.addEventListener('keydown', (event) => {
                     });
                 });
 
-                results_html = ``;
-                results.forEach((movie) => {
-                results_html += `
-                <div class="movie-box">
-                    <img src="${movie.poster_url}" alt="${movie.title} Poster">
-                    <div class="movie-info">
-                    <h3>${movie.title}</h3>
-                    <p>${movie.description}</p>
-                    </div>
-                </div>`;
-                });
+                checkIfItHasAnImage().then(() => {
+                    results_html = ``;
+                    results.forEach((movie) => {
+                    results_html += `
+                    <div class="movie-box">
+                        <img src="${movie.poster_url}" alt="${movie.title} Poster">
+                        <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <p>${movie.description}</p>
+                        </div>
+                    </div>`;
+                    });
 
-                console.log(results);
-                searchButtonArea.style.height = `200px`;
-                searchPageResults.innerHTML = `
-                <!--content-->
-                ${results_html}
-                `;
+                    console.log(results);
+                    searchButtonArea.style.height = `200px`;
+                    searchPageResults.innerHTML = `
+                    <!--content-->
+                    ${results_html}
+                    `;
+                })
+
             }else {
 
                 noResult.style.opacity = '1';
@@ -70,4 +73,17 @@ searchButton.addEventListener('keydown', (event) => {
     }
 })
 
-// now add some way to show the results inside the index page
+// results is a list of objects
+async function checkIfItHasAnImage() {
+    for(let i = 0; i < results.length; i++) {
+        
+        await fetch(results[i].poster_url).then((response) => {
+            if(response.ok === false) {
+                results[i].poster_url = `../images/empty.png`;
+            }
+        }).catch((error) => {
+            results[i].poster_url = `../images/empty.png`;
+        })
+            
+    }
+}
