@@ -1,10 +1,13 @@
 const searchButton = document.querySelector('.search-bar');
-const apikey = `b7df9d12`;
 const searchButtonArea = document.querySelector('#search-section');
 const searchPageResults = document.querySelector('.extra-on-enter');
 const horizontalRule = document.querySelector('.horizontal-rule');
 const closeButton = document.querySelector('.close-button');
 const noResult = document.querySelector('.no-results');
+
+// Another one - `b7df9d12` Over for 12-08-2025
+// Another one - `d4d6bd1b`
+const apikey = `cd72faf7`;
 
 let animationOn = false;
 let animationKey;

@@ -23,7 +23,9 @@ while(starterMovies.length != 5) {
 }
 
 // OMDB API initialisation. 1000 req per day
-const apikey = `b7df9d12`;
+// Another one - `b7df9d12` Over for 12-08-2025
+// Another one - `d4d6bd1b`
+const apikey = `cd72faf7`;
 let result = [];
 
 const intervalValue = setInterval(()=>{loadingScreen(loadingText);}, 300);
