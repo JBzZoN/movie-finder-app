@@ -10,9 +10,12 @@ const selectedPageColor = `rgba(217, 94, 94, 1)`;
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
-const loadingText = document.querySelector('.text-loader');
 let currPageNumber = 1;
 let centerPageOfCurrentPagination = 2;
+const moviesInAPage = 60;
+
+const totalMovies = movieObjects.length;
+const maxPageNumber = Math.floor(totalMovies/60);
 
 
 const starterMovies = [];
@@ -35,36 +38,35 @@ while(starterMovies.length != 5) {
 // Another one - `d4d6bd1b`
 // Another one - `acd519e3`
 const apikey = `cd72faf7`;
-let result = [];
 
-const intervalValue = setInterval(()=>{loadingScreen(loadingText);}, 300);
-
-
-async function getMovies() {
-
-  for(let i = 0; i < starterMovies.length; i++) {
-    let url = `http://www.omdbapi.com/?apikey=${apikey}&s=${starterMovies[i]}`;
-    const response = await fetch(url);
-    result = result.concat((await response.json()).Search);
-  }
-
-}
-
-const movies = [];
+let movies = [];
 const movieBox = document.querySelector('#movie-display');
 
-// after loading the api request, execute the function inside then
-getMovies().then(() => {
+
+function getMovies() {
+  for(let i = currPageNumber*moviesInAPage + 1;
+      (i < (currPageNumber+1)*moviesInAPage) && (i < totalMovies);
+      i++
+  ) {
+    movies.push(movieObjects[i]);
+  }
+}
+
+function renderPage() {
+
+  paginationDiv.innerHTML = '';
+  movieBox.style.marginTop = `0px`;
+  movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(1fr, 1fr))`;
+  movieBox.innerHTML = `
+      <div class="loading">
+        <span class="text-loader">Loading</span>
+      </div>`;
+  const loadingText = document.querySelector('.text-loader');
+  const intervalValue = setInterval(()=>{loadingScreen(loadingText);}, 300);
+  movies = [];
+  getMovies();
 
   movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
-  
-  result.forEach((movObj, index) => {
-    movies.push({
-      title: movObj.Title,
-      description: movObj.Year,
-      poster_url: movObj.Poster
-    });
-  });
 
   checkIfItHasAnImage().then(() => {
     let postHtml = '';
@@ -74,10 +76,10 @@ getMovies().then(() => {
       movies.forEach((movie) => {
         postHtml += `
         <div class="movie-box">
-          <img src="${movie.poster_url}" alt="${movie.title} Poster">
+          <img src="${movie.Poster}" alt="${movie.Title} Poster">
           <div class="movie-info">
-            <h3>${movie.title}</h3>
-            <p>${movie.description}</p>
+            <h3>${movie.Title}</h3>
+            <p>${movie.Year}</p>
           </div>
         </div>`;
       });
@@ -88,22 +90,23 @@ getMovies().then(() => {
     loadPagination();
     
   });
-  
-  
-});
+}
 
+renderPage();
 
 // Pagination
 function loadPagination() {
 
   paginationDiv.innerHTML = `
-  <div class="left-page"><</div>
+
+  <a href="#topmost" style="text-decoration:none; color:black"><div class="left-page"><</div></a>
   <div class="left-section"><<</div>
-  <div class="pageNumber page-a">${centerPageOfCurrentPagination - 1}</div>
-  <div class="pageNumber page-b">${centerPageOfCurrentPagination}</div>
-  <div class="pageNumber page-c">${centerPageOfCurrentPagination + 1}</div>
+  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-a">${centerPageOfCurrentPagination - 1}</div></a>
+  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-b">${centerPageOfCurrentPagination}</div></a>
+  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-c">${centerPageOfCurrentPagination + 1}</div></a>  
   <div class="right-section">>></div>
-  <div class="right-page">></div>
+  <a href="#topmost" style="text-decoration:none; color:black"><div class="right-page">></div></a>
+  
   `;
 
   const pageObjects = pages.map(
@@ -117,6 +120,13 @@ function loadPagination() {
     }
   );
 
+  document.querySelectorAll('.pageNumber').forEach((a) => {
+    a.addEventListener('click', () => {
+      currPageNumber = Number(a.innerHTML);
+      renderPage();
+    });
+  });
+
   document.querySelector('.left-section').addEventListener('click', () => {
     centerPageOfCurrentPagination -= 1;
     if(centerPageOfCurrentPagination < 2) {
@@ -127,21 +137,47 @@ function loadPagination() {
 
   document.querySelector('.right-section').addEventListener('click', () => {
     centerPageOfCurrentPagination += 1;
+    if(centerPageOfCurrentPagination + 1 > maxPageNumber) {
+      centerPageOfCurrentPagination = maxPageNumber - 1;
+    }
     loadPagination();
   });
 
 
   document.querySelector('.left-page').addEventListener('click', () => {
     currPageNumber -= 1;
+
     if(currPageNumber < 1) {
       currPageNumber = 1;
     }
-    loadPagination();
+
+    
+    if(currPageNumber === centerPageOfCurrentPagination - 2) {
+      centerPageOfCurrentPagination -= 1;
+    }else if(currPageNumber < centerPageOfCurrentPagination - 2) {
+      centerPageOfCurrentPagination = currPageNumber + 1;
+    }else if(currPageNumber > centerPageOfCurrentPagination + 1) {
+      centerPageOfCurrentPagination = currPageNumber - 1;
+    }
+
+    renderPage();
   });
 
   document.querySelector('.right-page').addEventListener('click', () => {
     currPageNumber += 1;
-    loadPagination();
+    if(currPageNumber > maxPageNumber) {
+      currPageNumber = maxPageNumber;
+    }
+
+    if(currPageNumber === centerPageOfCurrentPagination + 2) {
+      centerPageOfCurrentPagination += 1;
+    }else if(currPageNumber > centerPageOfCurrentPagination + 2) {
+      centerPageOfCurrentPagination = currPageNumber - 1;
+    }else if(currPageNumber < centerPageOfCurrentPagination - 1) {
+      centerPageOfCurrentPagination = currPageNumber + 1;
+    }
+
+    renderPage();
   });
 }
 
@@ -161,12 +197,12 @@ function loadingScreen(textObj) {
 async function checkIfItHasAnImage() {
     for(let i = 0; i < movies.length; i++) {
         
-        await fetch(movies[i].poster_url).then((response) => {
+        await fetch(movies[i].Poster).then((response) => {
             if(response.ok === false) {
-                movies[i].poster_url = `../images/empty.png`;
+                movies[i].Poster = `../images/empty.png`;
             }
         }).catch((error) => {
-            movies[i].poster_url = `../images/empty.png`;
+            movies[i].Poster = `../images/empty.png`;
         })
             
     }
