@@ -3,15 +3,16 @@ import { listOfIMDB } from "./data/movieImdbList.js";
 import { movieObjects } from "./data/movieObjects.js";
 import { movieToImdb } from "./data/movieNameToImdb.js";
 
+const pages = ["page-a", "page-b", "page-c"];
 
-console.log(listOfIMDB.length);
-console.log(movieObjects.length);
-console.log(movieToImdb.length);
+// Colours
+const selectedPageColor = `rgba(217, 94, 94, 1)`;
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
 const loadingText = document.querySelector('.text-loader');
-let pageNumber = 1;
+let currPageNumber = 1;
+let centerPageOfCurrentPagination = 2;
 
 
 const starterMovies = [];
@@ -49,8 +50,6 @@ async function getMovies() {
 
 }
 
-console.log(result.length, result);
-
 const movies = [];
 const movieBox = document.querySelector('#movie-display');
 
@@ -58,7 +57,6 @@ const movieBox = document.querySelector('#movie-display');
 getMovies().then(() => {
 
   movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
-  movieBox.style.marginTop = `50px`;
   
   result.forEach((movObj, index) => {
     movies.push({
@@ -84,28 +82,10 @@ getMovies().then(() => {
         </div>`;
       });
     }
+    movieBox.style.marginTop = `50px`;
     createMovieBox();
     movieBox.innerHTML = postHtml;
-    paginationDiv.innerHTML = `
-    <div class="left-page"><<</div>
-    <div>${pageNumber}</div>
-    <div>${pageNumber + 1}</div>
-    <div>${pageNumber + 2}</div>
-    <div class="right-page">>></div>
-    `;
-
-    document.querySelector('.left-page').addEventListener('click', () => {
-      pageNumber -= 1;
-      if(pageNumber < 1) {
-        pageNumber = 1;
-      }
-      loadPagination();
-    });
-
-    document.querySelector('.right-page').addEventListener('click', () => {
-      pageNumber += 1;
-      loadPagination();
-    });
+    loadPagination();
     
   });
   
@@ -115,23 +95,52 @@ getMovies().then(() => {
 
 // Pagination
 function loadPagination() {
+
   paginationDiv.innerHTML = `
-  <div class="left-page"><<</div>
-  <div>${pageNumber}</div>
-  <div>${pageNumber + 1}</div>
-  <div>${pageNumber + 2}</div>
-  <div class="right-page">>></div>
+  <div class="left-page"><</div>
+  <div class="left-section"><<</div>
+  <div class="pageNumber page-a">${centerPageOfCurrentPagination - 1}</div>
+  <div class="pageNumber page-b">${centerPageOfCurrentPagination}</div>
+  <div class="pageNumber page-c">${centerPageOfCurrentPagination + 1}</div>
+  <div class="right-section">>></div>
+  <div class="right-page">></div>
   `;
+
+  const pageObjects = pages.map(
+  (element) => document.querySelector(`.` + element));
+  
+  pageObjects.forEach(
+    (element) => {
+      if(element.innerHTML === currPageNumber.toString()) {
+        element.style.backgroundColor = selectedPageColor;
+      }
+    }
+  );
+
+  document.querySelector('.left-section').addEventListener('click', () => {
+    centerPageOfCurrentPagination -= 1;
+    if(centerPageOfCurrentPagination < 2) {
+      centerPageOfCurrentPagination = 2;
+    }
+    loadPagination();
+  });
+
+  document.querySelector('.right-section').addEventListener('click', () => {
+    centerPageOfCurrentPagination += 1;
+    loadPagination();
+  });
+
+
   document.querySelector('.left-page').addEventListener('click', () => {
-    pageNumber -= 1;
-    if(pageNumber < 1) {
-      pageNumber = 1;
+    currPageNumber -= 1;
+    if(currPageNumber < 1) {
+      currPageNumber = 1;
     }
     loadPagination();
   });
 
   document.querySelector('.right-page').addEventListener('click', () => {
-    pageNumber += 1;
+    currPageNumber += 1;
     loadPagination();
   });
 }
