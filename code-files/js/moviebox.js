@@ -1,7 +1,4 @@
-import { starterMovies as tags } from "./data/starterMovieTags.js";
-import { listOfIMDB } from "./data/movieImdbList.js";
 import { movieObjects } from "./data/movieObjects.js";
-import { movieToImdb } from "./data/movieNameToImdb.js";
 
 const pages = ["page-a", "page-b", "page-c"];
 
@@ -16,28 +13,6 @@ const moviesInAPage = 60;
 
 const totalMovies = movieObjects.length;
 const maxPageNumber = Math.floor(totalMovies/60);
-
-
-const starterMovies = [];
-const randomNumbers = [];
-// with 5 movie tags upto 50 movies
-// 10 movie with each search
-while(starterMovies.length != 5) {
-  let random = (Math.round(Math.random()*1000))%tags.length;
-
-  if(randomNumbers.includes(random)) {
-    continue;
-  }
-
-  randomNumbers.push(random);
-  starterMovies.push(tags[random]);
-}
-
-// OMDB API initialisation. 1000 req per day
-// Another one - `b7df9d12` Over for 12-08-2025
-// Another one - `d4d6bd1b`
-// Another one - `acd519e3`
-const apikey = `cd72faf7`;
 
 let movies = [];
 const movieBox = document.querySelector('#movie-display');
