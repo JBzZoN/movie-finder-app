@@ -1,5 +1,7 @@
 import { movieObjects } from "./data/movieObjects.js";
 
+console.log(movieObjects.length);
+
 const pages = ["page-a", "page-b", "page-c"];
 
 // Colours
