@@ -63,7 +63,8 @@ searchButton.addEventListener('keydown', (event) => {
                     results.push({
                     title: movObj.Title,
                     description: movObj.Year,
-                    poster_url: movObj.Poster
+                    poster_url: movObj.Poster,
+                    imdbID: movObj.imdbID
                     });
                 });
 
@@ -76,7 +77,7 @@ searchButton.addEventListener('keydown', (event) => {
                     results_html = ``;
                     results.forEach((movie) => {
                     results_html += `
-                    <div class="movie-box">
+                    <div class="movie-box" data-imdb="${movie.imdbID}" data-poster="${movie.poster_url}">
                         <img src="${movie.poster_url}" alt="${movie.title} Poster">
                         <div class="movie-info">
                         <h3>${movie.title}</h3>
@@ -90,6 +91,11 @@ searchButton.addEventListener('keydown', (event) => {
                     <!--content-->
                     ${results_html}
                     `;
+                    document.querySelectorAll('.movie-box').forEach((element) => {
+                        element.addEventListener('click', () => {
+                            renderOverlay(element.dataset.imdb, element.dataset.poster);
+                        })
+                    });
 
                     clearInterval(animationKey);
                     closeButton.style.backgroundColor = 'white';
@@ -130,4 +136,64 @@ async function checkIfItHasAnImage() {
         })
             
     }
+}
+
+
+// Overlay box for movie display
+function renderOverlay(imdb, poster) {
+  const overlay = document.querySelector('.overlay');
+  let url = `http://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
+
+  fetch(url).then((response) => response.json()
+  ).then((data) => {
+        if(data.Response == 'True') {
+
+          overlay.style.visibility = 'visible';
+          renderOverlayData(data, poster);
+          document.querySelector('.close-overlay').addEventListener('click', () => {
+            overlay.style.visibility = 'hidden';
+          });
+        }
+    });
+}
+
+function renderOverlayData(data, poster) {
+  let overlayImageRating = document.querySelector('.poster-ratings');
+  let html_lol =`
+    <img src="${poster}">
+    <div class="ratings-overlay">
+      <p>Genre: ${data.Genre}</p>
+      <p>Language: ${data.Language}</p>
+      <p>Year: ${data.Year}</p>
+      </br>
+  `;
+  
+  if(data.Ratings.length === 1)
+    html_lol+=
+       `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+        </div>`;
+  else if(data.Ratings.length === 2)
+    html_lol+=
+       `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+        <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
+        </div>`;
+  else if(data.Ratings.length === 3)
+      html_lol+=
+      `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+       <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
+       <p class="rating">Metacritic🎞️: ${data.Ratings[2].Value}</p>  
+       </div>`;
+  else
+    html_lol+= '</div>';
+
+  overlayImageRating.innerHTML = html_lol;
+
+  let overlayMovieDescription = document.querySelector('.movie-description');
+  overlayMovieDescription.innerHTML=`
+    <p>Director: ${data.Director}</p>
+    <p>Writer: ${data.Writer}</p>
+    <p>Actors: ${data.Actors}</p>
+    <p>Box Office: ${data.BoxOffice}</p>
+    <p>Plot: ${data.Plot}</p>
+  `;
 }

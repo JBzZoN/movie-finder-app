@@ -51,7 +51,7 @@ function renderPage() {
     function createMovieBox() {
       movies.forEach((movie) => {
         postHtml += `
-        <div class="movie-box" data-imdb="${movie.imdbID}">
+        <div class="movie-box" data-imdb="${movie.imdbID}" data-poster="${movie.Poster}">
           <img src="${movie.Poster}" alt="${movie.Title} Poster">
           <div class="movie-info">
             <h3>${movie.Title}</h3>
@@ -67,7 +67,7 @@ function renderPage() {
 
     document.querySelectorAll('.movie-box').forEach((element) => {
       element.addEventListener('click', () => {
-        renderOverlay(element.dataset.imdb);
+        renderOverlay(element.dataset.imdb, element.dataset.poster);
       })
     });
     loadPagination();
@@ -193,7 +193,7 @@ async function checkIfItHasAnImage() {
 
 
 // Overlay box for movie display
-function renderOverlay(imdb) {
+function renderOverlay(imdb, poster) {
   const overlay = document.querySelector('.overlay');
 
   let url = `http://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
@@ -204,7 +204,7 @@ function renderOverlay(imdb) {
         if(data.Response == 'True') {
 
           overlay.style.visibility = 'visible';
-          renderOverlayData(data);
+          renderOverlayData(data, poster);
           document.querySelector('.close-overlay').addEventListener('click', () => {
             overlay.style.visibility = 'hidden';
           });
@@ -212,10 +212,10 @@ function renderOverlay(imdb) {
     });
 }
 
-function renderOverlayData(data) {
+function renderOverlayData(data, poster) {
   let overlayImageRating = document.querySelector('.poster-ratings');
   overlayImageRating.innerHTML=`
-    <img src="${data.Poster}">
+    <img src="${poster}">
     <div class="ratings-overlay">
       <p>Genre: ${data.Genre}</p>
       <p>Language: ${data.Language}</p>
@@ -233,6 +233,6 @@ function renderOverlayData(data) {
     <p>Writer: ${data.Writer}</p>
     <p>Actors: ${data.Actors}</p>
     <p>Box Office: ${data.BoxOffice}</p>
-    <p>${data.Plot}</p>
+    <p>Plot: ${data.Plot}</p>
   `;
 }
