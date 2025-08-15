@@ -1,6 +1,5 @@
 import { movieObjects } from "./data/movieObjects.js";
-
-console.log(movieObjects.length);
+import { apikey } from "./data/settings.js";
 
 const pages = ["page-a", "page-b", "page-c"];
 
@@ -17,7 +16,7 @@ const totalMovies = movieObjects.length;
 const maxPageNumber = Math.floor(totalMovies/60);
 
 let movies = [];
-const movieBox = document.querySelector('#movie-display');
+const movieDisplay = document.querySelector('#movie-display');
 
 
 function getMovies() {
@@ -32,9 +31,9 @@ function getMovies() {
 function renderPage() {
 
   paginationDiv.innerHTML = '';
-  movieBox.style.marginTop = `0px`;
-  movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(1fr, 1fr))`;
-  movieBox.innerHTML = `
+  movieDisplay.style.marginTop = `0px`;
+  movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(1fr, 1fr))`;
+  movieDisplay.innerHTML = `
       <div class="loading">
         <span class="text-loader">Loading</span>
       </div>`;
@@ -43,7 +42,7 @@ function renderPage() {
   movies = [];
   getMovies();
 
-  movieBox.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
+  movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
 
   checkIfItHasAnImage().then(() => {
     let postHtml = '';
@@ -52,7 +51,7 @@ function renderPage() {
     function createMovieBox() {
       movies.forEach((movie) => {
         postHtml += `
-        <div class="movie-box">
+        <div class="movie-box" data-imdb="${movie.imdbID}">
           <img src="${movie.Poster}" alt="${movie.Title} Poster">
           <div class="movie-info">
             <h3>${movie.Title}</h3>
@@ -61,9 +60,16 @@ function renderPage() {
         </div>`;
       });
     }
-    movieBox.style.marginTop = `50px`;
+    movieDisplay.style.marginTop = `50px`;
     createMovieBox();
-    movieBox.innerHTML = postHtml;
+
+    movieDisplay.innerHTML = postHtml;
+
+    document.querySelectorAll('.movie-box').forEach((element) => {
+      element.addEventListener('click', () => {
+        renderOverlay(element.dataset.imdb);
+      })
+    });
     loadPagination();
     
   });
@@ -183,4 +189,50 @@ async function checkIfItHasAnImage() {
         })
             
     }
+}
+
+
+// Overlay box for movie display
+function renderOverlay(imdb) {
+  const overlay = document.querySelector('.overlay');
+
+  let url = `http://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
+
+  fetch(url).then((response) => response.json()
+  ).then((data) => {
+
+        if(data.Response == 'True') {
+
+          overlay.style.visibility = 'visible';
+          renderOverlayData(data);
+          document.querySelector('.close-overlay').addEventListener('click', () => {
+            overlay.style.visibility = 'hidden';
+          });
+        }
+    });
+}
+
+function renderOverlayData(data) {
+  let overlayImageRating = document.querySelector('.poster-ratings');
+  overlayImageRating.innerHTML=`
+    <img src="${data.Poster}">
+    <div class="ratings-overlay">
+      <p>Genre: ${data.Genre}</p>
+      <p>Language: ${data.Language}</p>
+      <p>Year: ${data.Year}</p>
+      </br>
+      <p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+      <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
+      <p class="rating">Metacritic🎞️: ${data.Ratings[2].Value}</p>  
+    </div>
+  `;
+
+  let overlayMovieDescription = document.querySelector('.movie-description');
+  overlayMovieDescription.innerHTML=`
+    <p>Director: ${data.Director}</p>
+    <p>Writer: ${data.Writer}</p>
+    <p>Actors: ${data.Actors}</p>
+    <p>Box Office: ${data.BoxOffice}</p>
+    <p>${data.Plot}</p>
+  `;
 }

@@ -26,6 +26,25 @@
   </head>
 
   <body>
+
+    <div class="overlay">
+      <div class="overlay-close">
+        <img src="../images/close-button.png" class="close-overlay">
+      </div>
+      <div class="poster-ratings">
+
+        <img src="../images/empty.png">
+        
+        <div class="ratings-overlay">
+          <p class="imdb-rating"></p>
+          <p class="rotten-rating"></p>
+          <p class="meta-rating"></p>  
+        </div>
+
+      </div>
+      <div class="movie-description"></div>
+    </div>
+
     <div class="header-main">
       <header>
         <h1>Movie Finder</h1>
@@ -75,7 +94,7 @@
       <p>Built with &#10084; using Python Flask and simple HTML & CSS.</p>
     </footer>
 
-    <script src="./js/search_index.js"></script>
+    <script type="module" src="./js/search_index.js"></script>
 
   </body>
 </html>
