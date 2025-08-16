@@ -95,6 +95,9 @@ main #search-section input {
     .extra-on-enter {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
+    #search-section {
+        height: 400px;
+    }
 }
 
 .search-bar::placeholder{

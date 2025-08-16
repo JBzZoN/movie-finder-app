@@ -14,6 +14,8 @@ let animationColor = `rgb(255, 255, 0)`;
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
     searchButtonArea.style.height = `500px`;
+    if(parseInt(window.innerWidth) <= 480)
+        searchButtonArea.style.height = `400px`;
     searchPageResults.innerHTML = ``;
     horizontalRule.innerHTML = ``;
 });
