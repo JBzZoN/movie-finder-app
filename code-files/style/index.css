@@ -91,7 +91,7 @@ main #search-section input {
     margin-bottom: 50px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 450px) {
     .extra-on-enter {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }

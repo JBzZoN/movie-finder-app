@@ -34,7 +34,7 @@
   border: 2px solid grey;
 }
 
-@media (max-width:600px){
+@media (max-width:450px){
     .movie-box {
         width: 120px;
         height: 180px;
