@@ -38,8 +38,14 @@ header .navbar a:hover{
 }
 
 /* Footer */
-footer{
+#aboutus-footer{
     margin-top: 50px;
     margin-left: 50px;
     padding-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+    #aboutus-footer{
+        margin-left: 10px;
+    }
 }

@@ -91,6 +91,12 @@ main #search-section input {
     margin-bottom: 50px;
 }
 
+@media (max-width: 600px) {
+    .extra-on-enter {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
 .search-bar::placeholder{
     font-family: 'Roboto';
     font-weight: 300;

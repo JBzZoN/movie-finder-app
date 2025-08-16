@@ -43,6 +43,9 @@ function renderPage() {
   getMovies();
 
   movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(180px, 1fr))`;
+  if(parseInt(window.innerWidth) <= 600)
+    movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(120px, 1fr))`;
+  
 
   checkIfItHasAnImage().then(() => {
     let postHtml = '';

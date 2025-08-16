@@ -1,6 +1,6 @@
 #movie-display {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));/*to220 min after loading screen*/
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));/*to 180 min after loading screen*/
   gap: 40px;
   padding-top: 10px;
   padding-bottom: 30px;
@@ -11,7 +11,7 @@
   margin-right: 40px;
   margin-top: 0px; /*change to 50px after loading screen*/
 
-  transition: margin 1s;
+  transition: margin-top 1s;
 }
 
 #movie-display .loading {
@@ -34,6 +34,12 @@
   border: 2px solid grey;
 }
 
+@media (max-width:600px){
+    .movie-box {
+        width: 120px;
+        height: 180px;
+    }
+}
 .movie-box:hover {
   transform: scale(1.05);
 }
