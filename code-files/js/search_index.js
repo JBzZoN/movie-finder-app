@@ -9,7 +9,7 @@ const noResult = document.querySelector('.no-results');
 
 let animationOn = false;
 let animationKey;
-let animationColor = `rgba(217, 94, 94, 1)`;
+let animationColor = `rgb(255, 255, 0)`;
 
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
@@ -25,7 +25,7 @@ function animation() {
         animationOn = true;
     }
     else{
-        closeButton.style.backgroundColor = 'white';
+        closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
         closeButton.style.transform = `rotate(0deg)`;
         animationOn = false;
     }
@@ -37,7 +37,7 @@ function animation() {
             animationOn = true;
         }
         else{
-            closeButton.style.backgroundColor = 'white';
+            closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
             closeButton.style.transform = `rotate(0deg)`;
             animationOn = false;
         }
@@ -71,7 +71,11 @@ searchButton.addEventListener('keydown', (event) => {
                 checkIfItHasAnImage().then(() => {
 
                     horizontalRule.innerHTML = `
-                    <hr style="color: grey;">
+                    <hr style="
+                        border: none;                  /* remove default */
+                        height: 2px;                   /* thickness */
+                        background-color: grey;        /* color */
+                        ">
                     `;
 
                     results_html = ``;
@@ -98,7 +102,7 @@ searchButton.addEventListener('keydown', (event) => {
                     });
 
                     clearInterval(animationKey);
-                    closeButton.style.backgroundColor = 'white';
+                    closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
                     closeButton.style.transform = `rotate(0deg)`;
                     animationOn = false;
                 });
@@ -115,7 +119,7 @@ searchButton.addEventListener('keydown', (event) => {
                 horizontalRule.innerHTML = ``;
 
                 clearInterval(animationKey);
-                closeButton.style.backgroundColor = 'white';
+                closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
                 closeButton.style.transform = `rotate(0deg)`;
                 animationOn = false;
             }
@@ -162,6 +166,7 @@ function renderOverlayData(data, poster) {
   let html_lol =`
     <img src="${poster}">
     <div class="ratings-overlay">
+      <p>Title: ${data.Title}</p>
       <p>Genre: ${data.Genre}</p>
       <p>Language: ${data.Language}</p>
       <p>Year: ${data.Year}</p>

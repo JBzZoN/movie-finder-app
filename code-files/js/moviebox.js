@@ -4,7 +4,7 @@ import { apikey } from "./data/settings.js";
 const pages = ["page-a", "page-b", "page-c"];
 
 // Colours
-const selectedPageColor = `rgba(217, 94, 94, 1)`;
+const selectedPageColor = `rgba(54, 77, 120, 0.77)`;
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
@@ -42,7 +42,7 @@ function renderPage() {
   movies = [];
   getMovies();
 
-  movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(220px, 1fr))`;
+  movieDisplay.style.gridTemplateColumns = `repeat(auto-fit, minmax(180px, 1fr))`;
 
   checkIfItHasAnImage().then(() => {
     let postHtml = '';
@@ -214,18 +214,35 @@ function renderOverlay(imdb, poster) {
 
 function renderOverlayData(data, poster) {
   let overlayImageRating = document.querySelector('.poster-ratings');
-  overlayImageRating.innerHTML=`
+  let html_lol =`
     <img src="${poster}">
     <div class="ratings-overlay">
+      <p>Title: ${data.Title}</p>
       <p>Genre: ${data.Genre}</p>
       <p>Language: ${data.Language}</p>
       <p>Year: ${data.Year}</p>
       </br>
-      <p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
-      <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
-      <p class="rating">Metacritic🎞️: ${data.Ratings[2].Value}</p>  
-    </div>
   `;
+  
+  if(data.Ratings.length === 1)
+    html_lol+=
+       `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+        </div>`;
+  else if(data.Ratings.length === 2)
+    html_lol+=
+       `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+        <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
+        </div>`;
+  else if(data.Ratings.length === 3)
+      html_lol+=
+      `<p class="rating">IMDb🎥: ${data.Ratings[0].Value}</p>
+       <p class="rating">Rotten Tomatoes🍅: ${data.Ratings[1].Value}</p>
+       <p class="rating">Metacritic🎞️: ${data.Ratings[2].Value}</p>  
+       </div>`;
+  else
+    html_lol+= '</div>';
+
+  overlayImageRating.innerHTML = html_lol;
 
   let overlayMovieDescription = document.querySelector('.movie-description');
   overlayMovieDescription.innerHTML=`

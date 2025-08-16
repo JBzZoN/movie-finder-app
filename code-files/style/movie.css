@@ -1,13 +1,14 @@
 #movie-display {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));/*to220 min after loading screen*/
-  gap: 20px;
-  padding: 20px;
+  gap: 40px;
+  padding-top: 10px;
+  padding-bottom: 30px;
   justify-items: center;
   text-align: center;
   margin: auto;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
   margin-top: 0px; /*change to 50px after loading screen*/
 
   transition: margin 1s;
@@ -26,11 +27,11 @@
   height: 270px;
   border-radius: 8px;
   overflow: hidden;
-  border: 2px solid rgba(105, 102, 102, 0.5);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-color: #000;
   cursor: pointer;
+  border: 2px solid grey;
 }
 
 .movie-box:hover {
@@ -87,9 +88,10 @@
   height: 40px;
 
   border: 2px solid grey;
-  background-color: rgb(218, 204, 204);
+  background-color: rgb(104, 98, 98);
+  color: black;
 
-  border-radius: 3px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +101,5 @@
 }
 
 .pagination div:hover {
-  background-color: grey;
-  border: 2px solid rgb(218, 204, 204);
   color: rgb(218, 204, 204);
 }

@@ -6,6 +6,10 @@ body {
     font-family: 'Roboto';
     font-weight: 300;
     margin: 0;
+    
+    /*DARK MODE THEME*/
+    background-color: rgb(43, 40, 40);
+    color: white;
 }
 
 .overlay {
@@ -54,6 +58,8 @@ body {
     margin-left: 20px;
     height: 80%;
     min-height: 150px;
+    max-width: 150px;
+    object-fit: cover;
     border: 2px solid white;
     border-radius: 8px;
 }

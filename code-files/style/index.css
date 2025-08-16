@@ -14,24 +14,31 @@ main #search-section input {
     height: 50px;
 
     border-radius: 25px;
-    box-shadow: 1px 1px 6px rgba(5, 5, 5, 0.1);
     border: none;   
 
     padding-left: 30px;
 
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.3s;
     cursor: pointer;
+
+    /*DARK MODE THEME*/
+    background-color: rgb(78, 72, 72);
+    color: white;
+}
+
+#search-section input::placeholder{
+    color: white;
 }
 
 #search-section input:hover {
-    box-shadow: 1px 1px 6px rgba(5, 5, 5, 0.2);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
     border: none;
 }
 
 #search-section input:focus {
     border: none;
     outline: none;
-    box-shadow: 1px 1px 6px rgba(5, 5, 5, 0.2);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 #contactus-text-demo {
@@ -48,7 +55,6 @@ main #search-section input {
 }
 
 .close-button {
-    box-shadow: 1px 1px 10px rgba(5, 5, 5, 0.1);
     align-self: center;
     margin-left: 10px;
     width: 30px;
@@ -59,11 +65,14 @@ main #search-section input {
     justify-content: center;
     align-items: center;
 
-    transition: background-color 1s, transform 1s;
+    transition: background-color 1s, transform 1s, box-shadow 0.3s;
+
+    /*DARK MODE THEME*/
+    background-color: rgb(78, 72, 72);
 }
 
 .close-button:hover {
-    box-shadow: 1px 1px 10px rgba(5, 5, 5, 0.2);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 .close-button img{
@@ -73,7 +82,7 @@ main #search-section input {
 
 .extra-on-enter {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     justify-items: center;
     gap: 20px;
     margin-left: 20px;
