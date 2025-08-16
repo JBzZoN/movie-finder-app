@@ -89,3 +89,27 @@ body {
 .movie-description p{
     margin: 0;
 }
+
+@media (max-width:480px) {
+    .poster-ratings img{
+        width: 120px;
+        height: 180px;
+    }
+    .poster-ratings .ratings-overlay p{
+        font-size: 10px;
+    }
+
+    .movie-description p{
+        font-size: 13px;
+    }
+
+    .overlay {
+        top: 10vh;
+        left: 2vw;
+        width: 96vw;
+        height: 80vh;
+        background-color: rgba(0, 0, 0, 0.9);
+        visibility: hidden;
+        border-radius: 20px;
+    }
+}
