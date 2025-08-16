@@ -32,6 +32,7 @@
   background-color: #000;
   cursor: pointer;
   border: 2px solid grey;
+  user-select: none;
 }
 
 @media (max-width:480px){

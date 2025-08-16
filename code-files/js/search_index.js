@@ -117,6 +117,8 @@ searchButton.addEventListener('keydown', (event) => {
                 }, 1000); // stays visible for 1 seconds
 
                 searchButtonArea.style.height = `500px`;
+                if(parseInt(window.innerWidth) <= 480)
+                    searchButtonArea.style.height = `400px`;
                 searchPageResults.innerHTML = ``;
                 horizontalRule.innerHTML = ``;
 
