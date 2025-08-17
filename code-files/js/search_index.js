@@ -11,7 +11,7 @@ let animationOn = false;
 let animationKey;
 let animationColor = `rgb(255, 255, 0)`;
 
-let mode = localStorage.getItem('mode') || 'dark';
+let mode = 'dark';
 
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
