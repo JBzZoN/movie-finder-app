@@ -7,10 +7,20 @@ body {
     font-weight: 300;
     margin: 0;
     
+    
+    transition: background-color 1s, color 1s;
+}
+
+html.dark body{
     /*DARK MODE THEME*/
     background-color: rgb(43, 40, 40);
     color: white;
-    transition: background-color 1s, color 1s;
+}
+
+html.light body{
+    /*DARK MODE THEME*/
+    background-color: white;
+    color: black;
 }
 
 .overlay {

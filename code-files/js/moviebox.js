@@ -3,14 +3,25 @@ import { apikey } from "./data/settings.js";
 
 const pages = ["page-a", "page-b", "page-c"];
 
-let mode = 'dark';
-
-console.log(mode);
-
-
 // darkMode Button
 const darkMode = document.querySelector('#dark-mode');
 let sunMoon = document.querySelector('#sun-moon');
+
+if(mode === 'dark') {
+    sunMoon.src = '../images/moon.png';
+    document.querySelectorAll('.nav-link').forEach((element) => {
+        element.style.setProperty('--inner-color', `rgb(43, 40, 40)`);
+        element.style.setProperty('--hover-color', `rgb(79, 72, 72)`);
+        element.style.color =  `white`;
+    });
+}else{
+    sunMoon.src = '../images/sun.png';
+    document.querySelectorAll('.nav-link').forEach((element) => {
+        element.style.setProperty('--inner-color', `white`);
+        element.style.setProperty('--hover-color', `rgba(187, 187, 187, 1)`);
+        element.style.color =  `black`;
+    });
+}
 
 // Colours
 const selectedPageColorDark = `rgba(54, 77, 120, 0.77)`;
@@ -18,8 +29,10 @@ const selectedPageColorLight = `rgba(255, 255, 0, 0.77)`;
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
-let currPageNumber = 1;
-let centerPageOfCurrentPagination = 2;
+let currPageNumber = Number(localStorage.getItem('page')) || 1;
+
+console.log(currPageNumber);
+let centerPageOfCurrentPagination = Number(localStorage.getItem('center')) || 2;
 const moviesInAPage = 60;
 
 const totalMovies = movieObjects.length;
@@ -121,6 +134,7 @@ darkMode.addEventListener('click', () => {
   
     if(mode === 'dark') {
         mode = 'light';
+        localStorage.setItem('mode', mode);
         sunMoon.src = '../images/sun.png';
         sunMoon.style.opacity = '1';
         sunMoon.style.transform = 'translateX(0px)';
@@ -139,6 +153,7 @@ darkMode.addEventListener('click', () => {
     }else{
         sunMoon.src = '../images/moon.png';
         mode = 'dark';
+        localStorage.setItem('mode', mode);
         sunMoon.style.opacity = '1';
         sunMoon.style.transform = 'translateX(15px)';
         darkMode.style.border = `2px solid white`;
@@ -201,22 +216,27 @@ function loadPagination() {
   document.querySelectorAll('.pageNumber').forEach((a) => {
     a.addEventListener('click', () => {
       currPageNumber = Number(a.innerHTML);
+      localStorage.setItem('page', currPageNumber.toString());
       renderPage();
     });
   });
 
   document.querySelector('.left-section').addEventListener('click', () => {
     centerPageOfCurrentPagination -= 1;
+    localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     if(centerPageOfCurrentPagination < 2) {
       centerPageOfCurrentPagination = 2;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }
     loadPagination();
   });
 
   document.querySelector('.right-section').addEventListener('click', () => {
     centerPageOfCurrentPagination += 1;
+    localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     if(centerPageOfCurrentPagination + 1 > maxPageNumber) {
       centerPageOfCurrentPagination = maxPageNumber - 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }
     loadPagination();
   });
@@ -224,18 +244,23 @@ function loadPagination() {
 
   document.querySelector('.left-page').addEventListener('click', () => {
     currPageNumber -= 1;
+    localStorage.setItem('page', currPageNumber.toString());
 
     if(currPageNumber < 1) {
       currPageNumber = 1;
+      localStorage.setItem('page', currPageNumber.toString());
     }
 
     
     if(currPageNumber === centerPageOfCurrentPagination - 2) {
       centerPageOfCurrentPagination -= 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }else if(currPageNumber < centerPageOfCurrentPagination - 2) {
       centerPageOfCurrentPagination = currPageNumber + 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }else if(currPageNumber > centerPageOfCurrentPagination + 1) {
       centerPageOfCurrentPagination = currPageNumber - 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }
 
     renderPage();
@@ -245,14 +270,18 @@ function loadPagination() {
     currPageNumber += 1;
     if(currPageNumber > maxPageNumber) {
       currPageNumber = maxPageNumber;
+      localStorage.setItem('page', currPageNumber.toString());
     }
 
     if(currPageNumber === centerPageOfCurrentPagination + 2) {
       centerPageOfCurrentPagination += 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }else if(currPageNumber > centerPageOfCurrentPagination + 2) {
       centerPageOfCurrentPagination = currPageNumber - 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }else if(currPageNumber < centerPageOfCurrentPagination - 1) {
       centerPageOfCurrentPagination = currPageNumber + 1;
+      localStorage.setItem('center', centerPageOfCurrentPagination.toString());
     }
 
     renderPage();

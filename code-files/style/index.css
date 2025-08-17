@@ -9,6 +9,16 @@
     transition: height 1s;
 }
 
+html.dark main #search-section input {
+    --bar-color:rgb(78, 72, 72);
+    --text-color: white;
+}
+
+html.light main #search-section input {
+    --bar-color:white;
+    --text-color: black;
+}
+
 main #search-section input {
     width: 75%;
     height: 50px;
@@ -18,20 +28,15 @@ main #search-section input {
 
     padding-left: 30px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-    background-color: rgb(78, 72, 72);
-    color: white;
+    background-color: var(--bar-color);
+    color: var(--text-color);
 
     transition: box-shadow 0.3s, background-color 1s;
     cursor: pointer;
 }
 
-.search-bar-grey::placeholder{
-    color: white;
-    transition: color 1s;
-}
-
-.search-bar-white::placeholder{
-    color: black;
+.search-bar::placeholder{
+    color: var(--text-color);
     transition: color 1s;
 }
 
@@ -59,6 +64,15 @@ main #search-section input {
     justify-content: center;
 }
 
+html.dark .close-button{
+    /*DARK MODE THEME*/
+    background-color: rgb(78, 72, 72);
+}
+
+html.light .close-button{
+    background-color: white;
+}
+
 .close-button {
     align-self: center;
     margin-left: 10px;
@@ -73,9 +87,6 @@ main #search-section input {
     align-items: center;
 
     transition: background-color 1s, transform 1s, box-shadow 0.3s;
-
-    /*DARK MODE THEME*/
-    background-color: rgb(78, 72, 72);
 }
 
 .close-button:hover {

@@ -9,6 +9,14 @@ header .header-bar{
 .header-bar h1{
     font-weight: 300;
 }
+
+html.dark #dark-mode{
+    border: 2px solid white;
+}
+html.light #dark-mode{
+    border: 2px solid black;
+}
+
 .header-bar #dark-mode{
     display: flex;
     justify-content:space-between;
@@ -17,17 +25,24 @@ header .header-bar{
     height: 20px;
     width: 35px;
     right: 20px;
-    border: 2px solid white;
     border-radius: 20px;
     background-color: transparent;
     user-select: none;
 }
 
+html.dark #sun-moon{
+    background-color: white;
+    transform: translateX(15px);
+}
+
+html.light #sun-moon{
+    background-color: black;
+    transform: translateX(0px);
+}
+
 #dark-mode #sun-moon{
     height: 100%;
     border-radius: 50%;
-    background-color: white;
-    transform: translateX(15px);
     transition: transform 0.3s;
 }
 
@@ -43,23 +58,27 @@ header .navbar{
     display: flex;
 }
 
-header .navbar a{
+html.dark header .navbar a{
     --inner-color: rgb(43, 40, 40);
     --hover-color: rgb(79, 72, 72);
+    color: white;
+}
 
+html.light header .navbar a{
+    --inner-color: white;
+    --hover-color: black;
+    color: black;
+}
+
+header .navbar a{
     border-right: 1px solid grey;
     text-align: center;
     align-content: center;
     font-size: 18px;
     text-decoration: none;  
-    color: black;
     flex:1;               /* for each to occupy same space */
-
-    /*DARK MODE THEME*/
     background-color: var(--inner-color);
-    color: white;
 
-    
     transition: background-color 1s, color 1s;
 }
 

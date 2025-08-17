@@ -7,6 +7,14 @@
 
   <title>Movie Finder</title>
 
+  <script>
+    const html = document.documentElement;
+    let mode = localStorage.getItem('mode') || 'dark';
+
+    html.classList.add(mode);
+    html.classList.remove('lightdark'.replace(mode));
+  </script>
+
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="style/header-and-footer.css" />
   <link rel="stylesheet" href="style/general.css" />

@@ -1,5 +1,25 @@
 import { apikey } from "./data/settings.js";
 
+// darkMode Button
+const darkMode = document.querySelector('#dark-mode');
+const sunMoon = document.querySelector('#sun-moon');
+
+if(mode === 'dark') {
+    sunMoon.src = '../images/moon.png';
+    document.querySelectorAll('.nav-link').forEach((element) => {
+        element.style.setProperty('--inner-color', `rgb(43, 40, 40)`);
+        element.style.setProperty('--hover-color', `rgb(79, 72, 72)`);
+        element.style.color =  `white`;
+    });
+}else{
+    sunMoon.src = '../images/sun.png';
+    document.querySelectorAll('.nav-link').forEach((element) => {
+        element.style.setProperty('--inner-color', `white`);
+        element.style.setProperty('--hover-color', `rgba(187, 187, 187, 1)`);
+        element.style.color =  `black`;
+    });
+}
+
 const searchButton = document.querySelector('.search-bar');
 const searchButtonArea = document.querySelector('#search-section');
 const searchPageResults = document.querySelector('.extra-on-enter');
@@ -10,8 +30,6 @@ const noResult = document.querySelector('.no-results');
 let animationOn = false;
 let animationKey;
 let animationColor = `rgb(255, 255, 0)`;
-
-let mode = 'dark';
 
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
@@ -142,13 +160,11 @@ searchButton.addEventListener('keydown', (event) => {
     }
 })
 
-// darkMode Button
-const darkMode = document.querySelector('#dark-mode');
-const sunMoon = document.querySelector('#sun-moon');
-
 darkMode.addEventListener('click', () => {
     if(mode === 'dark') {
+        
         mode = 'light';
+        localStorage.setItem(`mode`, mode);
         sunMoon.src = '../images/sun.png';
         
         sunMoon.style.transform = 'translateX(0px)';
@@ -167,12 +183,12 @@ darkMode.addEventListener('click', () => {
         document.querySelector('.search-bar').style.color = 'black';
         document.querySelector('.search-bar').style.backgroundColor = 'white';
         document.querySelector('.close-button').style.backgroundColor = `white`;
-        document.querySelector('.search-bar').classList.remove(`search-bar-grey`);
-        document.querySelector('.search-bar').classList.add('search-bar-white');     
+        document.querySelector('.search-bar').style.setProperty('--text-color', 'black');  
 
     }else{
-        sunMoon.src = '../images/moon.png';
         mode = 'dark';
+        localStorage.setItem(`mode`, mode);
+        sunMoon.src = '../images/moon.png';
         
         sunMoon.style.transform = 'translateX(15px)';
         darkMode.style.border = `2px solid white`;
@@ -189,8 +205,7 @@ darkMode.addEventListener('click', () => {
         document.querySelector('.search-bar').style.color = 'white';
         document.querySelector('.search-bar').style.backgroundColor = 'rgb(78, 72, 72)';
         document.querySelector('.close-button').style.backgroundColor = `rgb(78, 72, 72)`;
-        document.querySelector('.search-bar').classList.remove(`search-bar-white`);
-        document.querySelector('.search-bar').classList.add('search-bar-grey');     
+        document.querySelector('.search-bar').style.setProperty('--text-color', 'white');   
 
     }
 });
