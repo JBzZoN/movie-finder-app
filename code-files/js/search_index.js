@@ -11,6 +11,8 @@ let animationOn = false;
 let animationKey;
 let animationColor = `rgb(255, 255, 0)`;
 
+let mode = localStorage.getItem('mode') || 'dark';
+
 closeButton.addEventListener('click', () => {
     searchButton.value = '';
     searchButtonArea.style.height = `500px`;
@@ -28,6 +30,8 @@ function animation() {
     }
     else{
         closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
+        if(mode === 'light') 
+            closeButton.style.backgroundColor = 'white';
         closeButton.style.transform = `rotate(0deg)`;
         animationOn = false;
     }
@@ -40,6 +44,9 @@ function animation() {
         }
         else{
             closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
+            if(mode === 'light') 
+                closeButton.style.backgroundColor = 'white';
+
             closeButton.style.transform = `rotate(0deg)`;
             animationOn = false;
         }
@@ -105,6 +112,8 @@ searchButton.addEventListener('keydown', (event) => {
 
                     clearInterval(animationKey);
                     closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
+                    if(mode === 'light') 
+                        closeButton.style.backgroundColor = 'white';
                     closeButton.style.transform = `rotate(0deg)`;
                     animationOn = false;
                 });
@@ -124,12 +133,66 @@ searchButton.addEventListener('keydown', (event) => {
 
                 clearInterval(animationKey);
                 closeButton.style.backgroundColor = 'rgb(78, 72, 72)';
+                if(mode === 'light') 
+                    closeButton.style.backgroundColor = 'white';
                 closeButton.style.transform = `rotate(0deg)`;
                 animationOn = false;
             }
         });
     }
 })
+
+// darkMode Button
+const darkMode = document.querySelector('#dark-mode');
+const sunMoon = document.querySelector('#sun-moon');
+
+darkMode.addEventListener('click', () => {
+    if(mode === 'dark') {
+        mode = 'light';
+        sunMoon.src = '../images/sun.png';
+        
+        sunMoon.style.transform = 'translateX(0px)';
+        darkMode.style.border = `2px solid black`;
+        sunMoon.style.backgroundColor = `black`;
+
+        document.querySelector('body').style.backgroundColor = `white`;
+        document.querySelector('body').style.color = `black`;
+
+        document.querySelectorAll('.nav-link').forEach((element) => {
+            element.style.backgroundColor = `white`;
+            element.style.color =  `black`;
+        });
+        
+        document.querySelector('.search-bar').style.color = 'black';
+        document.querySelector('.search-bar').style.backgroundColor = 'white';
+        document.querySelector('.close-button').style.backgroundColor = `white`;
+        document.querySelector('.search-bar').classList.remove(`search-bar-grey`);
+        document.querySelector('.search-bar').classList.add('search-bar-white');     
+
+    }else{
+        sunMoon.src = '../images/moon.png';
+        mode = 'dark';
+        
+        sunMoon.style.transform = 'translateX(15px)';
+        darkMode.style.border = `2px solid white`;
+        sunMoon.style.backgroundColor = `white`;
+
+        document.querySelector('body').style.backgroundColor = `rgb(43, 40, 40)`;
+        document.querySelector('body').style.color = `white`;
+
+        document.querySelectorAll('.nav-link').forEach((element) => {
+            element.style.backgroundColor = `rgb(43, 40, 40)`;
+            element.style.color =  `white`;
+        });
+        document.querySelector('.search-bar').style.color = 'white';
+        document.querySelector('.search-bar').style.backgroundColor = 'rgb(78, 72, 72)';
+        document.querySelector('.close-button').style.backgroundColor = `rgb(78, 72, 72)`;
+        document.querySelector('.search-bar').classList.remove(`search-bar-white`);
+        document.querySelector('.search-bar').classList.add('search-bar-grey');     
+
+    }
+});
+
 
 // results is a list of objects
 async function checkIfItHasAnImage() {

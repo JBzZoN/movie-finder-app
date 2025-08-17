@@ -10,6 +10,7 @@ body {
     /*DARK MODE THEME*/
     background-color: rgb(43, 40, 40);
     color: white;
+    transition: background-color 1s, color 1s;
 }
 
 .overlay {

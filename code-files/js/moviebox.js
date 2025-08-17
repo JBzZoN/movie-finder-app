@@ -3,8 +3,18 @@ import { apikey } from "./data/settings.js";
 
 const pages = ["page-a", "page-b", "page-c"];
 
+let mode = 'dark';
+
+console.log(mode);
+
+
+// darkMode Button
+const darkMode = document.querySelector('#dark-mode');
+let sunMoon = document.querySelector('#sun-moon');
+
 // Colours
-const selectedPageColor = `rgba(54, 77, 120, 0.77)`;
+const selectedPageColorDark = `rgba(54, 77, 120, 0.77)`;
+const selectedPageColorLight = `rgba(255, 255, 0, 0.77)`;
 
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
@@ -78,30 +88,110 @@ function renderPage() {
   });
 }
 
+
 renderPage();
+
+darkMode.addEventListener('click', () => {
+
+    const pageObjects = pages.map(
+      (element) => document.querySelector(`.` + element));
+    if(mode === 'dark') {
+      document.querySelectorAll('.pagination-elem').forEach((element) => {
+        element.style.border = `2px solid grey`;
+        element.style.backgroundColor = `rgba(233, 197, 197, 1)`;
+        element.style.color = 'black';
+      });
+    }else if(mode === 'light') {
+      document.querySelectorAll('.pagination-elem').forEach((element) => {
+        element.style.border = `2px solid grey`;
+        element.style.backgroundColor = `rgb(104, 98, 98)`;
+        element.style.color = 'black';
+      });
+    }
+
+    pageObjects.forEach(
+      (element) => {
+        if(element.innerHTML === currPageNumber.toString() && mode==='dark') {
+          element.style.backgroundColor = selectedPageColorLight;
+        }else if(element.innerHTML === currPageNumber.toString() && mode==='light') {
+          element.style.backgroundColor = selectedPageColorDark;
+        }
+      }
+    );
+  
+    if(mode === 'dark') {
+        mode = 'light';
+        sunMoon.src = '../images/sun.png';
+        sunMoon.style.opacity = '1';
+        sunMoon.style.transform = 'translateX(0px)';
+        darkMode.style.border = `2px solid black`;
+        sunMoon.style.backgroundColor = `black`;
+
+        document.querySelector('body').style.backgroundColor = `white`;
+        document.querySelector('body').style.color = `black`;
+
+        document.querySelectorAll('.nav-link').forEach((element) => {
+            element.style.backgroundColor = `white`;
+            element.style.color =  `black`;
+        });    
+
+    }else{
+        sunMoon.src = '../images/moon.png';
+        mode = 'dark';
+        sunMoon.style.opacity = '1';
+        sunMoon.style.transform = 'translateX(15px)';
+        darkMode.style.border = `2px solid white`;
+        sunMoon.style.backgroundColor = `white`;
+
+        document.querySelector('body').style.backgroundColor = `rgb(43, 40, 40)`;
+        document.querySelector('body').style.color = `white`;
+
+        document.querySelectorAll('.nav-link').forEach((element) => {
+            element.style.backgroundColor = `rgb(43, 40, 40)`;
+            element.style.color =  `white`;
+        });
+
+    }
+});
 
 // Pagination
 function loadPagination() {
 
   paginationDiv.innerHTML = `
 
-  <a href="#topmost" style="text-decoration:none; color:black"><div class="left-page"><</div></a>
-  <div class="left-section"><<</div>
-  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-a">${centerPageOfCurrentPagination - 1}</div></a>
-  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-b">${centerPageOfCurrentPagination}</div></a>
-  <a href="#topmost" style="text-decoration:none; color:black"><div class="pageNumber page-c">${centerPageOfCurrentPagination + 1}</div></a>  
-  <div class="right-section">>></div>
-  <a href="#topmost" style="text-decoration:none; color:black"><div class="right-page">></div></a>
+  <a href="#top" style="text-decoration:none; color:black"><div class="left-page pagination-elem"><</div></a>
+  <div class="left-section pagination-elem"><<</div>
+  <a href="#top" style="text-decoration:none; color:black"><div class="pageNumber page-a pagination-elem">${centerPageOfCurrentPagination - 1}</div></a>
+  <a href="#top" style="text-decoration:none; color:black"><div class="pageNumber page-b pagination-elem">${centerPageOfCurrentPagination}</div></a>
+  <a href="#top" style="text-decoration:none; color:black"><div class="pageNumber page-c pagination-elem">${centerPageOfCurrentPagination + 1}</div></a>  
+  <div class="right-section pagination-elem">>></div>
+  <a href="#top" style="text-decoration:none; color:black"><div class="right-page pagination-elem">></div></a>
   
   `;
 
   const pageObjects = pages.map(
   (element) => document.querySelector(`.` + element));
-  
+
+  if(mode === 'dark') {
+    document.querySelectorAll('.pagination-elem').forEach((element) => {
+      element.style.border = `2px solid grey`;
+      element.style.backgroundColor = `rgb(104, 98, 98)`;
+      element.style.color = 'black';
+    });
+  }else if(mode === 'light') {
+    document.querySelectorAll('.pagination-elem').forEach((element) => {
+      element.style.border = `2px solid grey`;
+      element.style.backgroundColor = `rgba(233, 197, 197, 1)`;
+      element.style.color = 'black';
+    });
+  }
+
   pageObjects.forEach(
     (element) => {
-      if(element.innerHTML === currPageNumber.toString()) {
-        element.style.backgroundColor = selectedPageColor;
+      if(element.innerHTML === currPageNumber.toString() && mode==='dark') {
+        element.style.backgroundColor = selectedPageColorDark;
+      }else if(element.innerHTML === currPageNumber.toString() && mode==='light') {
+        element.style.backgroundColor = selectedPageColorLight;
       }
     }
   );

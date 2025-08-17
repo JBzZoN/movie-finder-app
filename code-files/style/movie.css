@@ -108,5 +108,5 @@
 }
 
 .pagination div:hover {
-  color: rgb(218, 204, 204);
+  background-color: rgba(162, 162, 162);
 }

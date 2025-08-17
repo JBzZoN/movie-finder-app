@@ -47,13 +47,19 @@
 
     <div class="header-main">
       <header>
-        <h1>Movie Finder</h1>
+
+        <div class="header-bar">
+          <h1>Movie Finder</h1>
+          <div id="dark-mode">
+            <img id="sun-moon" src="../images/moon.png">
+          </div>
+        </div>
 
         <!--Navigation Bar-->
         <nav class="navbar">
-            <a href="index.html"><div>Home</div></a>
-            <a href="movies.html"><div>Movies</div></a>
-            <a href="#aboutus-footer" id="right-option"><div>About us</div></a>
+            <a href="index.html" class="nav-link"><div>Home</div></a>
+            <a href="movies.html" class="nav-link"><div>Movies</div></a>
+            <a href="#aboutus-footer" id="right-option" class="nav-link"><div>About us</div></a>
         </nav>
       </header>
 
@@ -67,7 +73,7 @@
             </div>
 
             <div class="search-box">
-              <input type="text" placeholder="Enter the movie title..." class="search-bar" spellcheck="false"> <!-- Input box where the user types -->
+              <input type="text" placeholder="Enter the movie title..." class="search-bar search-bar-grey" spellcheck="false"> <!-- Input box where the user types -->
 
               <div class="close-button">
                 <img src="../images/close-button.png" alt="">
