@@ -30,8 +30,6 @@ const selectedPageColorLight = `rgba(255, 255, 0, 0.77)`;
 // Pagination
 const paginationDiv = document.querySelector('.pagination');
 let currPageNumber = Number(localStorage.getItem('page')) || 1;
-
-console.log(currPageNumber);
 let centerPageOfCurrentPagination = Number(localStorage.getItem('center')) || 2;
 const moviesInAPage = 60;
 
