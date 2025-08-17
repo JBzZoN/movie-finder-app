@@ -266,6 +266,7 @@ function loadPagination() {
 
   document.querySelector('.right-page').addEventListener('click', () => {
     currPageNumber += 1;
+    localStorage.setItem('page', currPageNumber.toString());
     if(currPageNumber > maxPageNumber) {
       currPageNumber = maxPageNumber;
       localStorage.setItem('page', currPageNumber.toString());
