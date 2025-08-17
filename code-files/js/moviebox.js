@@ -131,9 +131,10 @@ darkMode.addEventListener('click', () => {
         document.querySelector('body').style.color = `black`;
 
         document.querySelectorAll('.nav-link').forEach((element) => {
-            element.style.backgroundColor = `white`;
+            element.style.setProperty('--inner-color', `white`);
+            element.style.setProperty('--hover-color', `rgba(187, 187, 187, 1)`);
             element.style.color =  `black`;
-        });    
+        });
 
     }else{
         sunMoon.src = '../images/moon.png';
@@ -147,7 +148,8 @@ darkMode.addEventListener('click', () => {
         document.querySelector('body').style.color = `white`;
 
         document.querySelectorAll('.nav-link').forEach((element) => {
-            element.style.backgroundColor = `rgb(43, 40, 40)`;
+            element.style.setProperty('--inner-color', `rgb(43, 40, 40)`);
+            element.style.setProperty('--hover-color', `rgb(79, 72, 72)`);
             element.style.color =  `white`;
         });
 
