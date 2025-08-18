@@ -77,7 +77,7 @@ let results_html = '';
 
 searchButton.addEventListener('keydown', (event) => {
     if(event.key == 'Enter') {
-        let url = `http://www.omdbapi.com/?apikey=${apikey}&s=${searchButton.value}`;
+        let url = `https://www.omdbapi.com/?apikey=${apikey}&s=${searchButton.value}`;
 
         animation();
         
@@ -230,7 +230,7 @@ async function checkIfItHasAnImage() {
 // Overlay box for movie display
 function renderOverlay(imdb, poster) {
   const overlay = document.querySelector('.overlay');
-  let url = `http://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
+  let url = `https://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
 
   fetch(url).then((response) => response.json()
   ).then((data) => {

@@ -319,7 +319,7 @@ async function checkIfItHasAnImage() {
 function renderOverlay(imdb, poster) {
   const overlay = document.querySelector('.overlay');
 
-  let url = `http://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
+  let url = `https://www.omdbapi.com/?apikey=${apikey}&i=${imdb}`;
 
   fetch(url).then((response) => response.json()
   ).then((data) => {
