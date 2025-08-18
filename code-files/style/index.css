@@ -1,0 +1,154 @@
+#search-section {
+    height: 500px;
+
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    transition: height 1s;
+}
+
+html.dark main #search-section input {
+    --bar-color:rgb(78, 72, 72);
+    --text-color: white;
+}
+
+html.light main #search-section input {
+    --bar-color:white;
+    --text-color: black;
+}
+
+main #search-section input {
+    width: 75%;
+    height: 50px;
+
+    border-radius: 25px;
+    border: none;   
+
+    padding-left: 30px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    background-color: var(--bar-color);
+    color: var(--text-color);
+
+    transition: box-shadow 0.3s, background-color 1s;
+    cursor: pointer;
+}
+
+.search-bar::placeholder{
+    color: var(--text-color);
+    transition: color 1s;
+}
+
+#search-section input:hover {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+#search-section input:focus {
+    border: none;
+    outline: none;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+#contactus-text-demo {
+    height: 300px;
+    text-align: center;
+    align-content: center;
+    color: black;
+}
+
+.search-box {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+html.dark .close-button{
+    /*DARK MODE THEME*/
+    background-color: rgb(78, 72, 72);
+}
+
+html.light .close-button{
+    background-color: white;
+}
+
+.close-button {
+    align-self: center;
+    margin-left: 10px;
+    width: 30px;
+    
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 1s, transform 1s, box-shadow 0.3s;
+}
+
+.close-button:hover {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button img{
+    width: 20px;
+    height: 20px;
+}
+
+.extra-on-enter {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    justify-items: center;
+    gap: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 480px) {
+    .extra-on-enter {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    #search-section {
+        height: 400px;
+    }
+}
+
+.search-bar::placeholder{
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.search-box input{
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.search-box-relative {
+    position: relative;
+    width: 100%;
+}
+
+.no-results{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background-color: hsl(0, 9%, 68%);
+    color: white;
+    height: 30px;
+    border-radius: 20px;
+    position: absolute;
+    width: 100px;
+    bottom: -35px;
+    left: calc(50vw - 50px);
+
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}

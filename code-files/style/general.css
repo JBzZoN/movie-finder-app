@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto';
+    font-weight: 300;
+    margin: 0;
+    
+    
+    transition: background-color 1s, color 1s;
+}
+
+html.dark body{
+    /*DARK MODE THEME*/
+    background-color: rgb(43, 40, 40);
+    color: white;
+}
+
+html.light body{
+    /*DARK MODE THEME*/
+    background-color: white;
+    color: black;
+}
+
+.overlay {
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    visibility: hidden;
+    border-radius: 20px;
+}
+
+.overlay-close,
+.poster-ratings,
+.movie-description {
+    margin: 0px 20px 0px 20px;
+}
+
+.overlay-close{
+    margin-top: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.overlay-close img{
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    align-self: center;
+}
+
+.poster-ratings{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-height: 0px;
+    overflow: hidden;
+}
+
+.poster-ratings img{
+    margin-left: 20px;
+    height: 80%;
+    min-height: 150px;
+    max-width: 150px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+.poster-ratings .ratings-overlay{
+    flex: 1;
+    color: white;
+    margin: 20px;
+}
+
+.poster-ratings .ratings-overlay p{
+    margin: 0;
+}
+
+.movie-description{
+    flex: 1;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 20px;
+}
+
+.movie-description p{
+    margin: 0;
+}
+
+@media (max-width:480px) {
+    .poster-ratings img{
+        width: 120px;
+        height: 180px;
+    }
+    .poster-ratings .ratings-overlay p{
+        font-size: 13px;
+    }
+
+    .movie-description p{
+        font-size: 13px;
+    }
+
+    .overlay {
+        top: 10vh;
+        left: 2vw;
+        width: 96vw;
+        height: 80vh;
+        background-color: rgba(0, 0, 0, 0.9);
+        visibility: hidden;
+        border-radius: 20px;
+    }
+
+    .movie-description{
+        padding-left: 10px;
+        margin-top: 0px;
+    }
+    .poster-ratings img{
+        margin-left: 10px;
+    }
+}
