@@ -1,4 +1,4 @@
-# 🎥Movie Finder App
+# 🎥Movie Finder ApplksdfjS
 
 Movie Finder App is a web-based application built purely with HTML, CSS, and JavaScript. It lets users search for any movie title using the OMDb (Open Movie Database) API and displays comprehensive details about the selected movie. Key information such as title, director, actors, box office, language, genre, runtime, and more are shown for each search result. The app also includes a curated collection of 750 popular/latest movies for users to explore and spark curiosity. It features a clean, user-friendly interface with pagination for browsing lists. A dark/light theme toggle is provided, and the current theme mode and pagination state are saved in the browser’s localStorage, ensuring these preferences persist across sessions.
 
